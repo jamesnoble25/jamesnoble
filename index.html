@@ -25,11 +25,17 @@
       padding: 0;
     }
 
+    html, body {
+      height: 100%;
+    }
+
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: radial-gradient(circle at top, #151521 0, #050509 55%);
       color: var(--text);
       line-height: 1.6;
+      opacity: 0; /* page fade-in */
+      animation: bodyFadeIn 0.7s ease-out forwards;
     }
 
     a {
@@ -49,7 +55,10 @@
       top: 0;
       z-index: 20;
       backdrop-filter: blur(16px);
-      background: rgba(5, 5, 9, 0.8);
+      background: rgba(5, 5, 9, 0.85);
+      transform: translateY(-10px);
+      opacity: 0;
+      animation: headerDrop 0.6s ease-out 0.2s forwards;
     }
 
     .nav-inner {
@@ -80,6 +89,7 @@
       color: var(--muted);
       padding-bottom: 0.1rem;
       border-bottom: 1px solid transparent;
+      transition: color 0.18s ease, border-color 0.18s ease;
     }
 
     nav a:hover {
@@ -156,9 +166,10 @@
       font-size: 0.9rem;
       font-weight: 500;
       cursor: pointer;
-      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease, border-color 0.16s ease;
       background: transparent;
       color: var(--text);
+      will-change: transform;
     }
 
     .btn-primary {
@@ -168,7 +179,7 @@
     }
 
     .btn-primary:hover {
-      transform: translateY(-1px);
+      transform: translateY(-1px) scale(1.02);
       box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5);
     }
 
@@ -180,6 +191,7 @@
     .btn-outline:hover {
       border-color: var(--accent);
       background: rgba(25, 25, 36, 0.95);
+      transform: translateY(-1px);
     }
 
     .hero-meta {
@@ -205,6 +217,7 @@
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
       font-size: 0.9rem;
       color: var(--muted);
+      animation: floatSlow 7s ease-in-out infinite;
     }
 
     .hero-card-title {
@@ -233,6 +246,7 @@
       overflow: hidden;
       background: #000;
       border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
     }
 
     .video-wrapper iframe,
@@ -260,6 +274,13 @@
       flex-direction: column;
       gap: 0.6rem;
       font-size: 0.9rem;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 204, 77, 0.55);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
     }
 
     .project-type {
@@ -329,6 +350,7 @@
       padding: 1rem;
       font-size: 0.9rem;
       color: var(--muted);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
     }
 
     .contact-item {
@@ -347,6 +369,55 @@
       font-size: 0.8rem;
       color: var(--muted);
       text-align: center;
+    }
+
+    /* Scroll reveal base */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition:
+        opacity 0.7s ease-out,
+        transform 0.7s ease-out;
+      will-change: opacity, transform;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Small stagger helper */
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+
+    /* Keyframes */
+    @keyframes bodyFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes headerDrop {
+      from {
+        opacity: 0;
+        transform: translateY(-12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes floatSlow {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-6px); }
+      100% { transform: translateY(0); }
     }
 
     /* Responsive */
@@ -387,25 +458,25 @@
 
   <main>
     <!-- Hero -->
-    <section class="hero" aria-label="Introduction">
+    <section class="hero reveal" aria-label="Introduction">
       <div>
-        <h1 class="hero-title">Jameson<br />Film & Animation</h1>
-        <p class="hero-tagline">
+        <h1 class="hero-title delay-1">Jameson<br />Film & Animation</h1>
+        <p class="hero-tagline delay-2">
           Aspiring filmmaker and editor creating commentary videos, short animations, and narrative-driven projects.
         </p>
 
-        <div class="hero-buttons">
+        <div class="hero-buttons delay-3">
           <a href="#reel" class="btn btn-primary">▶ Watch Showreel</a>
           <a href="#projects" class="btn btn-outline">View All Projects</a>
         </div>
 
-        <div class="hero-meta">
+        <div class="hero-meta delay-3">
           <span>Premiere Pro • After Effects • Blender</span>
           <span>YouTube commentary & narrative edits</span>
         </div>
       </div>
 
-      <aside class="hero-card">
+      <aside class="hero-card reveal delay-2">
         <div class="hero-card-title">
           <span>For Film School Reviewers</span>
           <span class="hero-card-tag">Quick Notes</span>
@@ -422,16 +493,15 @@
     </section>
 
     <!-- Showreel -->
-    <section id="reel" aria-labelledby="reel-title">
+    <section id="reel" class="reveal" aria-labelledby="reel-title">
       <h2 class="section-title" id="reel-title">Showreel</h2>
       <p class="section-subtitle">
         A short highlight of my recent work. This includes clips from commentary videos,
         game edits, and any narrative or animation pieces I’ve worked on.
       </p>
 
-      <div class="video-wrapper" aria-label="Showreel video">
+      <div class="video-wrapper">
         <!-- Replace VIDEO_ID_HERE with your actual YouTube showreel ID -->
-        <!-- Example: src="https://www.youtube.com/embed/dQw4w9WgXcQ" -->
         <iframe
           src="https://www.youtube.com/embed/VIDEO_ID_HERE"
           title="Jameson Showreel"
@@ -442,7 +512,7 @@
     </section>
 
     <!-- Projects -->
-    <section id="projects" aria-labelledby="projects-title">
+    <section id="projects" class="reveal" aria-labelledby="projects-title">
       <h2 class="section-title" id="projects-title">Selected Projects</h2>
       <p class="section-subtitle">
         A selection of films, animations, and YouTube projects.  
@@ -451,7 +521,7 @@
 
       <div class="project-grid">
         <!-- Example: Short film / narrative -->
-        <article class="project-card">
+        <article class="project-card reveal delay-1">
           <div class="project-type">Short Film</div>
           <h3 class="project-title">[Short Film Title]</h3>
           <div class="project-roles">
@@ -470,7 +540,7 @@
         </article>
 
         <!-- Example: Animation -->
-        <article class="project-card">
+        <article class="project-card reveal delay-2">
           <div class="project-type">Animation</div>
           <h3 class="project-title">[Animation Project Name]</h3>
           <div class="project-roles">
@@ -489,7 +559,7 @@
         </article>
 
         <!-- Example: YouTube commentary / essay -->
-        <article class="project-card">
+        <article class="project-card reveal delay-3">
           <div class="project-type">YouTube Commentary</div>
           <h3 class="project-title">[Video Title – e.g. “Why Games Don’t Feel Rewarding Anymore”]</h3>
           <div class="project-roles">
@@ -512,7 +582,7 @@
     </section>
 
     <!-- About -->
-    <section id="about" aria-labelledby="about-title">
+    <section id="about" class="reveal" aria-labelledby="about-title">
       <h2 class="section-title" id="about-title">About Me</h2>
       <div class="about-layout">
         <div>
@@ -551,7 +621,7 @@
     </section>
 
     <!-- Contact -->
-    <section id="contact" aria-labelledby="contact-title">
+    <section id="contact" class="reveal" aria-labelledby="contact-title">
       <h2 class="section-title" id="contact-title">Contact</h2>
       <div class="contact-card">
         <p>
@@ -570,14 +640,27 @@
             youtube.com/@YOURCHANNEL
           </a>
         </p>
-
-        <!-- Add more socials if you want -->
       </div>
     </section>
   </main>
 
-  <footer>
-    © <!-- You can change this year manually --> 2025 Jameson – Film & Animation Portfolio
+  <footer class="reveal">
+    © 2025 Jameson – Film & Animation Portfolio
   </footer>
+
+  <!-- Scroll reveal script -->
+  <script>
+    // Add the 'visible' class when elements enter the viewport
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
