@@ -38,12 +38,10 @@
       animation: bodyFadeIn 0.7s ease-out forwards;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
 
-    /* Sticky header */
+    /* Layout */
     header {
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       position: sticky;
@@ -65,6 +63,13 @@
       justify-content: space-between;
     }
 
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+
     nav ul {
       list-style: none;
       display: flex;
@@ -74,15 +79,12 @@
 
     nav a {
       color: var(--muted);
-      border-bottom: 1px solid transparent;
       padding-bottom: 0.1rem;
+      border-bottom: 1px solid transparent;
       transition: 0.18s ease;
     }
 
-    nav a:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-    }
+    nav a:hover { color: var(--accent); border-color: var(--accent); }
 
     main {
       max-width: var(--max-width);
@@ -95,9 +97,7 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     }
 
-    section:last-of-type {
-      border-bottom: none;
-    }
+    section:last-of-type { border-bottom: none; }
 
     .section-title {
       font-size: 1.4rem;
@@ -114,7 +114,7 @@
       margin-bottom: 1.5rem;
     }
 
-    /* Hero section */
+    /* Hero */
     .hero {
       display: grid;
       grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
@@ -163,9 +163,7 @@
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
     }
 
-    .btn-primary:hover {
-      transform: translateY(-1px) scale(1.02);
-    }
+    .btn-primary:hover { transform: translateY(-1px) scale(1.02); }
 
     .btn-outline {
       border-color: var(--border);
@@ -178,21 +176,32 @@
       transform: translateY(-1px);
     }
 
-    /* Reveal animation */
-    .reveal {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: 0.7s ease-out;
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .delay-1 { transition-delay: 0.1s; }
-    .delay-2 { transition-delay: 0.2s; }
-    .delay-3 { transition-delay: 0.3s; }
 
-    /* Project grid */
+    .hero-meta span {
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: rgba(15, 15, 24, 0.9);
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at top left, #202032, #11111b);
+      border-radius: 1.3rem;
+      padding: 1.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.65);
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* Project cards */
     .project-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -214,8 +223,8 @@
 
     .project-type {
       font-size: 0.75rem;
-      color: var(--muted);
       text-transform: uppercase;
+      color: var(--muted);
       letter-spacing: 0.08em;
     }
 
@@ -230,10 +239,10 @@
     }
 
     .project-footer {
-      margin-top: 0.4rem;
       display: flex;
       justify-content: space-between;
       font-size: 0.8rem;
+      margin-top: 0.4rem;
       color: var(--muted);
     }
 
@@ -242,29 +251,35 @@
       text-decoration: underline;
     }
 
-    /* Skills pills */
+    /* About */
+    .about-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 2rem;
+    }
+
     .pill-list {
       display: flex;
       flex-wrap: wrap;
       gap: 0.4rem;
-      margin-top: 0.5rem;
     }
 
     .pill {
       padding: 0.3rem 0.7rem;
       font-size: 0.8rem;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15,23,42,0.8);
+      border: 1px solid rgba(148,163,184,0.4);
       color: var(--muted);
     }
 
-    /* Contact card */
+    /* Contact */
     .contact-card {
       background: var(--card);
       border-radius: 1rem;
       border: 1px solid var(--border);
       padding: 1rem;
+      font-size: 0.9rem;
       color: var(--muted);
     }
 
@@ -273,6 +288,26 @@
       padding: 2rem 1rem;
       color: var(--muted);
       font-size: 0.8rem;
+    }
+
+    /* Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: 0.7s ease-out;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Keyframes */
+    @keyframes bodyFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes headerDrop {
+      from { opacity: 0; transform: translateY(-12px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -296,9 +331,10 @@
   <!-- Hero -->
   <section class="hero reveal">
     <div>
-      <h1 class="hero-title delay-1">James Noble<br>Film and Animation</h1>
+      <h1 class="hero-title delay-1">James Noble<br>Film &amp; Animation</h1>
+
       <p class="hero-tagline delay-2">
-        Aspiring filmmaker and editor creating commentary videos, animations and game-focused visual projects.
+        Aspiring filmmaker and editor creating commentary videos, short animations and visual projects.
       </p>
 
       <div class="hero-buttons delay-3">
@@ -306,21 +342,25 @@
         <a href="#about" class="btn btn-outline">About Me</a>
       </div>
 
-      <div class="hero-meta delay-3" style="display:flex;flex-wrap:wrap;gap:1rem;font-size:0.85rem;color:var(--muted);">
-        <span style="padding:0.35rem 0.75rem;border:1px solid rgba(148,163,184,0.3);border-radius:999px;">Premiere Pro</span>
-        <span style="padding:0.35rem 0.75rem;border:1px solid rgba(148,163,184,0.3);border-radius:999px;">Blender</span>
-        <span style="padding:0.35rem 0.75rem;border:1px solid rgba(148,163,184,0.3);border-radius:999px;">YouTube Editing</span>
+      <!-- updated: removed After Effects -->
+      <div class="hero-meta delay-3">
+        <span>Premiere Pro • Blender</span>
+        <span>YouTube commentary &amp; visual edits</span>
       </div>
     </div>
 
     <aside class="hero-card reveal delay-2">
-      <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;">
-        <span style="color:var(--accent-soft);font-size:0.95rem;">For Film School Reviewers</span>
-        <span style="background:rgba(15,23,42,0.8);padding:0.25rem 0.6rem;border-radius:999px;font-size:0.75rem;border:1px solid rgba(148,163,184,0.4);">Notes</span>
+      <div class="hero-card-title">
+        <span>For Film School Reviewers</span>
+        <span class="hero-card-tag">Quick Notes</span>
       </div>
       <p>
-        This portfolio shows a mix of commentary-style edits, short animations and creative visual projects.
-        My focus is on pacing, style and experimenting with ways to make simple ideas engaging.
+        This site collects my favourite work so far, including small animations
+        and game-focused commentary videos.
+      </p>
+      <p style="margin-top:0.4rem;">
+        For each project, I’ve listed my roles so you can see where I handled editing,
+        writing, pacing and visual style.
       </p>
     </aside>
   </section>
@@ -328,7 +368,9 @@
   <!-- Projects -->
   <section id="projects" class="reveal">
     <h2 class="section-title">Selected Projects</h2>
-    <p class="section-subtitle">A mixture of animation, commentary and creative edits.</p>
+    <p class="section-subtitle">
+      A selection of animations and commentary projects.
+    </p>
 
     <div class="project-grid">
 
@@ -338,7 +380,7 @@
         <h3 class="project-title">“I Love” – Repo Animation</h3>
         <div class="project-roles">Roles: 3D Animation, Character Posing, Rendering</div>
         <p class="project-desc">
-          A short Repo animation based on the “I love” trend. Fully animated and timed by me, focusing on expression and stylised movement.
+          A short Repo animation based on the “I love” trend. Fully animated and timed by me.
         </p>
         <div class="project-footer">
           <span>Duration: 0:12</span>
@@ -346,13 +388,14 @@
         </div>
       </article>
 
-      <!-- Minecraft Love Letter -->
+      <!-- Minecraft Video (UPDATED) -->
       <article class="project-card reveal delay-2">
         <div class="project-type">Commentary</div>
         <h3 class="project-title">A Love Letter To Minecraft</h3>
         <div class="project-roles">Roles: Script, Editing, Gameplay Capture</div>
         <p class="project-desc">
-          A reflective commentary video discussing why Minecraft is meaningful to so many people. Focuses on calm pacing and simple visual storytelling.
+          A reflective commentary video about why Minecraft is meaningful to so many people.
+          Focuses on calm pacing and simple visual storytelling.
         </p>
         <div class="project-footer">
           <span>Duration: 2:38</span>
@@ -364,9 +407,9 @@
       <article class="project-card reveal delay-3">
         <div class="project-type">Video Essay</div>
         <h3 class="project-title">Why Games Don’t Feel Rewarding Anymore</h3>
-        <div class="project-roles">Roles: Script, Editing, Motion Graphics, Sound</div>
+        <div class="project-roles">Roles: Script, Editing, Sound</div>
         <p class="project-desc">
-          A breakdown of modern reward systems in games, mixing commentary with gameplay footage and simple motion graphics.
+          A breakdown of modern reward systems in games, mixing commentary with gameplay footage.
         </p>
         <div class="project-footer">
           <span>Duration: 5:51</span>
@@ -380,7 +423,7 @@
         <h3 class="project-title">Indie Games Are Controlling The Market</h3>
         <div class="project-roles">Roles: Script, Editing, Visual Storytelling</div>
         <p class="project-desc">
-          A commentary on why indie games feel more creative than big-budget titles, using layered footage and clear pacing.
+          A commentary on creativity in indie games, using layered footage and pacing.
         </p>
         <div class="project-footer">
           <span>Duration: 3:30</span>
@@ -388,13 +431,13 @@
         </div>
       </article>
 
-      <!-- Grappling -->
+      <!-- Grappling Hook -->
       <article class="project-card reveal delay-2">
         <div class="project-type">Video Essay</div>
         <h3 class="project-title">Why Every Game Has a Grappling Hook Now</h3>
         <div class="project-roles">Roles: Script, Editing, Gameplay Capture</div>
         <p class="project-desc">
-          A look at the rise of grappling hooks in modern games and how they change movement and level design.
+          Talking about the rise of grappling hooks in games and how they change movement.
         </p>
         <div class="project-footer">
           <span>Duration: 6:36</span>
@@ -408,7 +451,7 @@
         <h3 class="project-title">Bugs That Became Features</h3>
         <div class="project-roles">Roles: Script, Editing, Comparison Shots</div>
         <p class="project-desc">
-          Exploring famous game bugs that turned into features, with clear comparisons and structured explanations.
+          Exploring well-known game bugs that became permanent mechanics.
         </p>
         <div class="project-footer">
           <span>Duration: 5:04</span>
@@ -422,34 +465,33 @@
   <!-- About -->
   <section id="about" class="reveal">
     <h2 class="section-title">About Me</h2>
-    <div class="about-layout" style="display:grid;grid-template-columns:1.4fr 1fr;gap:2rem;">
+    <div class="about-layout">
       <div>
         <p>
-          I’m James Noble, an aspiring filmmaker and editor. Most of my work so far has been online, through
-          commentary videos, game-focused edits and small animated projects. I am now focusing on building
-          stronger storytelling skills for film school.
+          I’m James Noble, an aspiring filmmaker and editor. Most of my work so far
+          has been online, through YouTube videos, game edits and small animation projects.
         </p>
         <p style="margin-top:1rem;">
-          I enjoy experimenting with pacing and style, and finding ways to make simple ideas feel more engaging.
-          I like mixing gameplay, live-action clips and animation when it fits the idea.
+          I enjoy playing with pacing, humour and timing, and I like mixing gameplay and animation
+          when it fits the idea. I’m always trying to make simple ideas feel more engaging.
         </p>
       </div>
 
       <div>
-        <h3 style="font-size:1rem;margin-bottom:0.4rem;">Tools and Skills</h3>
+        <h3 style="font-size:1rem;margin-bottom:0.4rem;">Tools &amp; Skills</h3>
         <div class="pill-list">
           <span class="pill">Adobe Premiere Pro</span>
-          <span class="pill">Blender</span>
+          <span class="pill">Blender (3D & Toon Shading)</span>
           <span class="pill">YouTube Editing</span>
           <span class="pill">Storyboarding</span>
-          <span class="pill">Sound and Music Timing</span>
+          <span class="pill">Sound & Music Timing</span>
         </div>
 
         <h3 style="font-size:1rem;margin-top:1.2rem;margin-bottom:0.4rem;">Interests</h3>
         <div class="pill-list">
           <span class="pill">Game-focused videos</span>
           <span class="pill">Stylised 3D characters</span>
-          <span class="pill">Commentary content</span>
+          <span class="pill">Comedy & commentary</span>
           <span class="pill">Short-form storytelling</span>
         </div>
       </div>
@@ -460,17 +502,13 @@
   <section id="contact" class="reveal">
     <h2 class="section-title">Contact</h2>
     <div class="contact-card">
-      <p>
-        If you would like to see more work or ask about specific projects, you can contact me here.
-      </p>
+      <p>If you would like to see more work or ask about specific projects, you can contact me here.</p>
 
-      <p class="contact-item" style="margin-top:0.5rem;">
-        Email:
+      <p class="contact-item">Email:
         <a href="mailto:jamesnoble0025@gmail.com">jamesnoble0025@gmail.com</a>
       </p>
 
-      <p class="contact-item" style="margin-top:0.3rem;">
-        YouTube:
+      <p class="contact-item">YouTube:
         <a href="https://www.youtube.com/@dialJameson" target="_blank">youtube.com/@dialJameson</a>
       </p>
     </div>
@@ -479,7 +517,7 @@
 </main>
 
 <footer class="reveal">
-  © 2025 James Noble – Film and Animation Portfolio
+  © 2025 James Noble – Film &amp; Animation Portfolio
 </footer>
 
 <!-- Reveal script -->
